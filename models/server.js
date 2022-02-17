@@ -39,6 +39,9 @@ class Server{
         // this.app.use('/api/search', require('../routes/search.routes'));   
         // this.app.use('/api/uploads', require('../routes/uploads.routes')); 
 
+        this.app.get('*', (req, res) => { 
+            res.sendFile( path.resolve( __dirname,'../public/index.html') )
+            });
               
     }
 
