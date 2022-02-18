@@ -3,6 +3,37 @@ const bcryptjs = require ('bcryptjs');
 const User = require ('../models/user');
 
 
+
+const usersPost= async (req, res = response) => {
+    
+    
+    // console.log(req.body)
+    
+    const { name, ...rest }= req.body
+    
+    // const user = new User ({email, password, name});
+    const user = new User ({name, ...rest});
+    
+    // const salt = bcryptjs.genSaltSync(); 
+    // user.password = bcryptjs.hashSync(password,salt);
+
+    await user.save();
+    res.json({
+        user
+    })
+}
+
+const getUserById = async ( req, res ) =>{
+
+    const { id } = req.params;
+    // console.log(id)
+
+   const  user =  await User.findById( id ).populate ('user','name');
+    // .populate ('category','name');
+    res.json( user );
+}
+
+
 const usersGet = async (req,res=response)=>{
 
     const { limit , from }=req.query;
@@ -19,27 +50,6 @@ const usersGet = async (req,res=response)=>{
       usuarios
 
     });
-}
-
-const usersPost= async (req, res = response) => {
-    
- 
-    // console.log(req.body)
-
-    const { name, ...rest }= req.body
-    
-    // const user = new User ({email, password, name});
-    const user = new User ({name, ...rest});
-    
-    // const salt = bcryptjs.genSaltSync(); 
-    // user.password = bcryptjs.hashSync(password,salt);
-
-    await user.save();
-    res.json({
-        user
-    })
-
-
 }
 
 const usersPut= async (req, res) => {
@@ -80,5 +90,6 @@ module.exports={
     usersGet,
     usersPost,
     usersPut,
-    usersDelete
+    usersDelete,
+    getUserById
 }

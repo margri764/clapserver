@@ -3,11 +3,11 @@ const {check} = require ('express-validator');
 const router = Router();
 
 
-const { usersGet, usersPost, usersPut, usersDelete } = require ('../controllers/user.controllers');
+const { usersGet, usersPost, usersPut, usersDelete,getUserById } = require ('../controllers/user.controllers');
 
-const {  checkEmail, checkId } = require('../helpers/db-validators');
+// const {  checkEmail, checkId } = require('../helpers/db-validators');
 
-const {checkToken, checkFields} = require('../middlewares/check-fields');
+// const {checkToken, checkFields} = require('../middlewares/check-fields');
 
 // const role = require('../models/role');
 
@@ -25,6 +25,13 @@ router.post('/',
     // checkFields
 ],
 usersPost);
+
+router.get('/:id',[
+
+    // check('id', 'no es un id de Mongo valido').isMongoId(),
+    // check('id').custom( checkProduct),
+    // checkFields,
+],getUserById);
 
 // router.put('/:id', 
 // [
