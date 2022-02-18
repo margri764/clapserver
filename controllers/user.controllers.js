@@ -9,26 +9,32 @@ const usersPost= async (req, res = response) => {
     
     // console.log(req.body)
     
-    const { name, ...rest }= req.body
+    const { name, email, ...rest }= req.body
+    console.log(req.body);
+
+    const checkEmail = await User.findOne({email:email});
+    if(checkEmail){
+        return res.status(400).json({
+            msg:'Este correo ya esta registrado'
+        });
+    }
     
-    // const user = new User ({email, password, name});
     const user = new User ({name, ...rest});
     
     // const salt = bcryptjs.genSaltSync(); 
     // user.password = bcryptjs.hashSync(password,salt);
 
     await user.save();
-    res.json({
-        user
-    })
+    res.json({user})
 }
 
 const getUserById = async ( req, res ) =>{
 
     const { id } = req.params;
-    // console.log(id)
+    console.log(id)
 
-   const  user =  await User.findById( id ).populate ('user','name');
+   const  user =  await User.findById( id )
+//    .populate ('user','name');
     // .populate ('category','name');
     res.json( user );
 }
