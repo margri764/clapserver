@@ -3,7 +3,7 @@ const {check} = require ('express-validator');
 const router = Router();
 
 
-const { usersGet, usersPost, usersPut, usersDelete,getUserById } = require ('../controllers/user.controllers');
+const { usersGet,getUserById, createUserAccount } = require ('../controllers/user.controllers');
 
 // const {  checkEmail, checkId } = require('../helpers/db-validators');
 
@@ -23,8 +23,7 @@ router.post('/',
     // check('password','El password es obligatorio, mas de 6 letras').isLength({min:6}),
     // check('role').custom( isRoleValid),
     // checkFields
-],
-usersPost);
+],createUserAccount);
 
 router.get('/:id',[
 
