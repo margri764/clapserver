@@ -1,93 +1,70 @@
 const {Schema, model} = require ('mongoose');
 
 const UserSchema = Schema({
+
+    // name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    password:{type:String, required: true },
+    code: { type: String, required: true },
+    status: { type: String, required: true, default: 'UNVERIFIED' }
     
-    firstName : {
-        type: String,
-     default: ''
-       
-    },
-    
-    lastName : {
-        type: String,
-     default: ''
-
-    },
-
-    userName : {
-        type: String,
-        default: '',
-
-    },
-
-    realm : {
-        type: String,
-     default: ''
-
-    },
-
-    email : {
-        type: String,
-        require: true
-    },
-
-    emailVerified : {
-        type: Boolean,
-        default: false
-    },
-
-    password : {
-        type: String,
-        require: true
-    },
-
-    createdAt : {
-        type: Date,
-        default: ''
-
-    },
-
-    updateAT : {
-        type: Date,
-         default: ''
-
-    },
-
-    roold : {
-        type: String,
-        default: 'user'
-    
-    },
-    // name:  {
-    //     type:String,
-    //     required: true
-    // },
-
-    // alias:  {
-    //     type:String,
-    //     required: true
-    // },
-
-    // titular:  {
-    //     type:String,
-    //     required: true
-    // },
-
-    // web:  {
-    //     type:String,
-    //     required: true
-    // },
-
-    // email: {
+    // firstName : {
     //     type: String,
-    //     required: true,
-    //     // unique: true,
-    //     },
+    //  default: ''
+       
+    // },
     
-    // dateBirth:  {
+    // lastName : {
+    //     type: String,
+    //  default: ''
+
+    // },
+
+    // userName : {
+    //     type: String,
+    //     default: '',
+
+    // },
+
+    // realm : {
+    //     type: String,
+    //  default: ''
+
+    // },
+
+    // email : {
+    //     type: String,
+    //     require: true
+    // },
+
+    // emailVerified : {
+    //     type: Boolean,
+    //     default: false
+    // },
+
+    // password : {
+    //     type: String,
+    //     require: true
+    // },
+
+    // createdAt : {
     //     type: Date,
-    //     required: true
-    // },    
+    //     default: ''
+
+    // },
+
+    // updateAT : {
+    //     type: Date,
+    //      default: ''
+
+    // },
+
+    // roold : {
+    //     type: String,
+    //     default: 'user'
+    
+    // },
+    
 
         
 

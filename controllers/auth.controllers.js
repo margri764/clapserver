@@ -1,171 +1,132 @@
-const {response} = require('express');
-const User = require('../models/user');
-const bcryptjs = require('bcryptjs');
+const {response} = require ('express');
+const User = require ('../models/user');
+const { v4: uuidv4 } = require('uuid');
+const { getToken, getTokenData } = require('../helpers/jwt-generator');
+const { getTemplate, sendEmail } = require('../config/confirmEmail.config');
 
-const { JWTGenerator, googleVerify } = require('../helpers');
+const bcryptjs = require ('bcryptjs');
 
-
-const firstRegister = async (req , res =response) => {
-
-    const {email, password, ...body} = req.body;
-
-
+const signUp = async (req, res=response) => {
+    
     try {
-        const checkEmail = await User.findOne({email});
 
-        if(checkEmail) {
-            return res.status(400).json({
-                msg: 'Usuario existe'
+        // Obtener la data del usuario: name, email
+        const { email, password } = req.body;
+
+        // Verificar que el usuario no exista
+        let user = await User.findOne({ email }) || null;
+
+        if(user !== null) {
+            return res.json({
+                success: false,
+                msg: 'Usuario ya existe'
             });
         }
 
-        
+        // Generar el código
+        const code = uuidv4();
 
-            const data = {
-                ...body,
-                email,
-                password
-                // firstName: firstName,
-                // lastName,
-                // userName,
-                // realm,
-                // email : email,
-                // emailVerified,
-                // password: user.password,
-                // createdAt,
-                // updateAT,
-                // roold,
-            }
+        // Crear un nuevo usuario
+        user = new User({ password, email, code });
 
-            const user = new User (data);
-            // const salt = bcryptjs.genSaltSync(); 
-            // user.password = bcryptjs.hashSync(password,salt);
-            await user.save();
+        // Generar token
+        const token = getToken({ email, code });
 
-        
+        // Obtener un template
+        const template = getTemplate(token);
 
-        // if(!userDb.state) {
-        //     return res.status(400).json({
-        //         msg: 'Usuario no activo en BD'
-        //     })
-        // }
+        // Enviar el email
+        await sendEmail(email, 'Este es un email de prueba', template);
+        await user.save();
 
-
-
-        // const checkPassword = bcryptjs.compareSync(password, userDb.password)
-        // if(!checkPassword) {
-        //     return res.status(400).json({
-        //         msg: 'Pasword incorrecto'
-        //     })
-        // }
-
-        // const token = await generarJWT(usuario.id);
         res.json({
-            user
-            // token
+            success: true,
+            msg: 'Registrado correctamente'
+        });
 
-        })
-   } catch (error) {
-        console.log(error)
-        res.status(500).json({
-            msg: 'hable con el administrador'
-        })       
+    } catch (error) {
+        console.log(error);
+        return res.json({
+            success: false,
+            msg: 'Error al registrar usuario'
+        });
     }
-
-
 }
 
-const login = async (req, res=response)=>{
+const confirm = async (req, res) => {
+    try {
 
-    const {email, password} = req.body;
+       // Obtener el token
+       const { token } = req.params;
+       
+       // Verificar la data
+       const data = await getTokenData(token);
 
-   try {
-        const userDb = await User.findOne({email});
-        if(!userDb) {
-            return res.status(400).json({
+       if(data === null) {
+            return res.json({
+                success: false,
+                msg: 'Error al obtener data'
+            });
+       }
+
+       console.log(data);
+
+       const { email, code } = data.data;
+
+       // Verificar existencia del usuario
+       const user = await User.findOne({ email }) || null;
+
+       if(user === null) {
+            return res.json({
+                success: false,
                 msg: 'Usuario no existe'
             });
-        }
+       }
 
-        if(!userDb.state) {
-            return res.status(400).json({
-                msg: 'Usuario no activo en BD'
-            })
-        }
+       // Verificar el código
+       if(code !== user.code) {
+            return res.redirect('/error.html');
+       }
 
-        const checkPassword = bcryptjs.compareSync(password, userDb.password)
-        if(!checkPassword) {
-            return res.status(400).json({
-                msg: 'Pasword incorrecto'
-            })
-        }
-        // const token = await generarJWT(usuario.id);
-        res.json({
-            userDb,
-            // token
+       // Actualizar usuario
+       user.status = 'VERIFIED';
+       await user.save();
 
-        })
-   } catch (error) {
-        console.log(error)
-        res.status(500).json({
-            msg: 'hable con el administrador'
-        })       
+       // Redireccionar a la confirmación
+       return res.redirect('/confirm.html');
+        
+    } catch (error) {
+        console.log(error);
+        return res.json({
+            success: false,
+            msg: 'Error al confirmar usuario'
+        });
     }
 }
 
-const googleSignIn = async ( req, res) => {
 
-    console.log(req.body);
-    // const { idToken } = req.body;       
-    
-    // try {
-        
-    //     const { name, img, email } = await googleVerify(idToken); 
-   
-      
-    //     let usuario = await Usuario.findOne( {email} );
-    //     let resToFront= "exitsUserInDB";
 
-    //     if(!usuario){
-    //         const data={
-    //             name,
-    //             email,
-    //             img,
-    //             password:'sin password - usuario de google',
-    //             google: true
-    //     };
-    //         usuario = new Usuario (data)
-    //         await usuario.save()
-    //     }
-      
 
-    //     if(!usuario.state){
-    //         return res.status(401).json({
-    //             msg: 'hable con el administrador, usuario bloqueado'
-    //         });
-    //     }
-    //     const token = await generarJWT(usuario.id);
 
-    //     res.json({
-    //         // usuario,
-    //         // token   
-    //         // email
-    //         resToFront
-                 
-           
-    //     });
-        
-    // } catch (error) {
 
-    //     res.status(400).json({
-    //         msg: 'Token de Google no es válido'
-    //     })
-    // }
+const getUserById = async ( req, res ) =>{
+
+    const { id } = req.params;
+    console.log(id)
+
+   const  user =  await User.findById( id )
+
+    res.json( user );
 }
 
+
+
+
+
 module.exports={
-    login,
-    googleSignIn,
-    firstRegister
+ 
+    getUserById,
+    signUp,
+    confirm
 }
 
