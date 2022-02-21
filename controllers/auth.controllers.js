@@ -58,6 +58,8 @@ const confirm = async (req, res) => {
 
        // Obtener el token
        const { token } = req.params;
+       console.log(req.params);
+
        
        // Verificar la data
        const data = await getTokenData(token);
@@ -69,7 +71,6 @@ const confirm = async (req, res) => {
             });
        }
 
-       console.log(data);
 
        const { email, code } = data.data;
 

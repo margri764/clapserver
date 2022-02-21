@@ -13,7 +13,7 @@ router.post('/login',[
     checkFields
 ],signUp);  
 
-router.get('/artistas/perfil/:id',[
+router.get('/confirm/:token',[
 
 ],confirm);  
 

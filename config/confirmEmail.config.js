@@ -50,7 +50,7 @@ let transporter = nodemailer.createTransport({
             <a
               
             
-                href=" http://localhost:4200/artistas/perfil/${ token }"
+                href=" http://localhost:4200/bienvenida/${ token }"
                 target="_blank"
             >Confirmar Cuenta</a>
         </div>
