@@ -2,65 +2,75 @@
 
 const {Schema, model} = require ('mongoose');
 
-const ProfileSchema = Schema({
+const ArtistAccount = Schema({
     
     userName : {
         type: String,
         default: ''
-       
     },
     
-    name : {
-        type: String,
-     default: ''
-
-    },
-
-    banner : {
-        type: String,
-        default: '',
-
-    },
-
-    avatar : {
-        type: String,
-     default: ''
-
-    },
-
-    type : {
-        type: String,
-        require: true
-    },
-
-    profileData : {
-        type: Object,
-    },
-
     city : {
         type: String,
-        require: true
+        required: true
     },
-
+    
     state: {
         type: String,
         default: ''
     },
-
-    country : {
-        type: String,
-         default: ''
-    },
-
+    
     website : {
         type: String,
         default: ''
     },
     
-    status : {
+    email :{
         type: String,
-        default: ''
+        required: true
     },
+
+    dateBirth : {
+        type: Date,
+        required: true
+    },
+
+    jobDate : {
+        type: String,
+        required:true
+    },
+    
+    alias : {
+        type: String,
+        required : true
+    },
+
+    titular : {
+        type: String,
+        required : true
+    },
+    
+    avatar : {
+        type: String,
+
+    },
+
+    type : {
+        type: String,
+  
+    },
+
+// no vi desde donde se carga el pais
+    country : {
+        type: String,
+         default: ''
+    },
+
+
+    status : {
+        type: Boolean,
+        default: true
+    },
+    
     
     createdAT : {
         type: Date,
@@ -75,7 +85,7 @@ const ProfileSchema = Schema({
   
 });
 
-ProfileSchema.methods.toJSON = function(){
+ArtistAccount.methods.toJSON = function(){
     const {__v,...rest} = this.toObject();
     // const {__v,password,_id,...usuario} = this.toObject();
     // usuario.uid= _id;
@@ -83,4 +93,4 @@ ProfileSchema.methods.toJSON = function(){
 }
 
 
-module.exports= model('Profile', ProfileSchema);
+module.exports= model('ArtistAccount', ArtistAccount);

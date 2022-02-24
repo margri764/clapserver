@@ -1,10 +1,11 @@
 const {response} = require ('express');
-const User = require ('../models/user');
+const UserLogin = require ('../models/user-login');
 const { v4: uuidv4 } = require('uuid');
 const { getToken, getTokenData } = require('../helpers/jwt-generator');
 const { getTemplate, sendEmail } = require('../config/confirmEmail.config');
 
 const bcryptjs = require ('bcryptjs');
+
 
 const signUp = async (req, res=response) => {
     
@@ -14,7 +15,7 @@ const signUp = async (req, res=response) => {
         const { email, password } = req.body;
 
         // Verificar que el usuario no exista
-        let user = await User.findOne({ email }) || null;
+        let user = await UserLogin.findOne({ email }) || null;
 
         if(user !== null) {
             return res.json({
@@ -27,7 +28,7 @@ const signUp = async (req, res=response) => {
         const code = uuidv4();
 
         // Crear un nuevo usuario
-        user = new User({ password, email, code });
+        user = new UserLogin({ password, email, code });
 
         // Generar token
         const token = getToken({ email, code });
@@ -75,7 +76,7 @@ const confirm = async (req, res) => {
        const { email, code } = data.data;
 
        // Verificar existencia del usuario
-       const user = await User.findOne({ email }) || null;
+       const user = await UserLogin.findOne({ email }) || null;
 
        if(user === null) {
             return res.json({
@@ -110,15 +111,15 @@ const confirm = async (req, res) => {
 
 
 
-const getUserById = async ( req, res ) =>{
+// const getUserById = async ( req, res ) =>{
 
-    const { id } = req.params;
-    console.log(id)
+//     const { id } = req.params;
+//     console.log(id)
 
-   const  user =  await User.findById( id )
+//    const  user =  await User.findById( id )
 
-    res.json( user );
-}
+//     res.json( user );
+// }
 
 
 
@@ -126,7 +127,7 @@ const getUserById = async ( req, res ) =>{
 
 module.exports={
  
-    getUserById,
+    // getUserById,
     signUp,
     confirm
 }

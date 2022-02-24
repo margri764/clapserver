@@ -14,7 +14,6 @@ router.post('/login',[
 ],signUp);  
 
 router.get('/confirm/:token',[
-
 ],confirm);  
 
 module.exports= router;
