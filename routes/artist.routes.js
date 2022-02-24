@@ -4,13 +4,17 @@ const { Router } = require ('express');
 const {check} = require ('express-validator');
 const router = Router();
 const { checkFields } = require ('../middlewares');
-const { createEducation , createExperience , createSkills, createArtistAccount, getDataArtist, createAbout} = require('../controllers/artist.controllers');
+const { createEducation , createExperience , createSkills, createArtistAccount, getDataArtist, createAbout,
+getArtistExperience, getArtistEducation} = require('../controllers/artist.controllers');
 
 
 
 router.post('/experience',[ ],createExperience);  
 
-router.post('/education',[ ],createEducation);  
+router.get('/experience/:id',[ ], getArtistExperience);  
+
+router.post('/education',[ ],createEducation); 
+router.get('/education/:id',[ ], getArtistEducation);   
 
 router.post('/skills',[ ],createSkills);  
 
@@ -20,6 +24,7 @@ router.post('/about',[ ],createAbout);
 
 
 router.get('/',[ ], getDataArtist);  
+
 
 
 

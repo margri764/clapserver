@@ -225,8 +225,6 @@ const getDataArtist = async (req,res=response)=>{
     const skills = await  ArtistSkills.find( {uid} );
     const about = await ArtistAbout.find( {uid} );
 
-
-  
     res.json({
         education,
         experience,
@@ -234,12 +232,26 @@ const getDataArtist = async (req,res=response)=>{
         about
 
     });
-       
-          
-       
+}
+
+const getArtistExperience = async (req,res=response)=>{
+
+    const {uid } = req.params
+    const experience = await  ArtistExperience .find( {uid} );
+    res.json({
+        experience,
+    });
 }
 
 
+const getArtistEducation = async (req,res=response)=>{
+
+    const {uid } = req.params
+    const education = await  ArtistEducation.find( {uid} );
+    res.json({
+        education
+    });
+}
 
 
 // const getUserById = async ( req, res ) =>{
@@ -262,6 +274,8 @@ module.exports={
     createEducation,
     createSkills,
     getDataArtist,
-    createAbout
+    createAbout,
+    getArtistExperience,
+    getArtistEducation
 }
 
