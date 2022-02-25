@@ -48,6 +48,7 @@ let transporter = nodemailer.createTransport({
             <h2>Hola </h2>
             <p>Para confirmar tu cuenta, ingresa al siguiente enlace</p>
             <a href="https://backclap.herokuapp.com/bienvenida/${ token }"target="_blank">Confirmar Cuenta</a>
+                    
         </div>
       `;
   }
