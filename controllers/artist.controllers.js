@@ -152,7 +152,7 @@ const createAbout = async (req,res=response)=>{
 
     try {
         const {id, ...body} = req.body;
-    
+    console.log(req.body)
         const data ={
             ...body,
             user: id
