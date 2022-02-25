@@ -242,9 +242,7 @@ const getArtistExperienceById = async (req,res=response)=>{
     const { id } = req.params
 
     const experience = await  ArtistExperience.find( {user:id} );
-    res.json({
-        experience
-    });
+    res.json({experience});
 }
 
 
@@ -252,23 +250,16 @@ const getArtistEducationById = async (req,res=response)=>{
 
     const {id } = req.params
     const education = await  ArtistEducation.find( {user:id} );
-    res.json({
-        education
-    });
+    res.json({education});
 }
+
 const getArtistByID = async (req,res=response)=>{
 
     const {id} = req.params
-    // console.log(req.params)
-    // const data ={
-        
-    //     id: id
-    // }
+
     const user = await  ArtistAccount.findById( id);
-    // console.log(user)
-    res.json({
-        user
-    });
+ 
+    res.json({ user });
 }
 
 const getAboutById = async (req,res=response)=>{
