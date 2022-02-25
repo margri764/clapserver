@@ -11,13 +11,13 @@ const ArtistAbout = Schema({
 
     about:{
         type: String,
-        required : true
+        // required : true
     },
   
     user:{
         type: Schema.Types.ObjectId,
         ref: "ArtistAccount",
-        required: true
+        // required: true
     }
 
 });

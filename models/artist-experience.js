@@ -8,40 +8,40 @@ const ArtistExperience = Schema({
 
         jobTitle:{
             type: String,
-            required : true
+            // required : true
         },
         companyName:{
             type: String,
-            required : true
+            // required : true
         },
         type:{
             type: String,
-            required : true
+            // required : true
         },
         linkPortfolio:{
             type: String,
-            required : true
+            // required : true
         },
         startDate:{
             type: Date,
-            required : true
+            // required : true
         },
         endDate:{
             type: Date,
-            required : true
+            // required : true
         },
         country:{
             type: String,
-            required : true
+            // required : true
         },
         description:{
             type: String,
-            required : true
+            // required : true
         },
         user:{
             type: Schema.Types.ObjectId,
             ref: "ArtistAccount",
-            required: true
+            // required: true
         }
         
 

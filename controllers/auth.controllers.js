@@ -65,12 +65,12 @@ const confirm = async (req, res) => {
        // Verificar la data
        const data = await getTokenData(token);
 
-       if(data === null) {
-            return res.json({
-                success: false,
-                msg: 'Error al obtener data'
-            });
-       }
+    //    if(data === null) {
+    //         return res.json({
+    //             success: false,
+    //             msg: 'Error al obtener data'
+    //         });
+    //    }
 
 
        const { email, code } = data.data;
@@ -78,24 +78,24 @@ const confirm = async (req, res) => {
        // Verificar existencia del usuario
        const user = await UserLogin.findOne({ sendEmail }) ;
 
-       if(!user ) {
-            return res.json({
-                success: false,
-                msg: 'Usuario no existe'
-            });
-       }
+    //    if(!user ) {
+    //         return res.json({
+    //             success: false,
+    //             msg: 'Usuario no existe'
+    //         });
+    //    }
 
        // Verificar el código
-       if(code !== user.code) {
-            return res.redirect('/error.html');
-       }
+    //    if(code !== user.code) {
+    //         return res.redirect('/error.html');
+    //    }
 
        // Actualizar usuario
        user.status = 'VERIFIED';
        await user.save();
 
-       // Redireccionar a la confirmación
-       return res.redirect('/confirm.html');
+    //    // Redireccionar a la confirmación
+    //    return res.redirect('/confirm.html');
         
     } catch (error) {
         console.log(error);

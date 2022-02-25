@@ -9,40 +9,40 @@ const ArtistEducation = Schema({
 
     education:{
         type: String,
-        required : true
+        // required : true
     },
     degree:{
         type: String,
-        required : true
+        // required : true
     },
     school:{
         type: String,
-        required : true
+        // required : true
     },
     startDate:{
         type: Date,
-        required : true
+        // required : true
     },
     country:{
         type: String,
-        required : true
+        // required : true
     },
     city:{
         type: String,
-        required : true
+        // required : true
     },
     endDate:{
         type: Date,
-        required : true
+        // required : true
     },
     modo:{
         type: String,
-        required : true
+        // required : true
     },
     user:{
         type: Schema.Types.ObjectId,
         ref: "ArtistAccount",
-        required: true
+        // required: true
     }
 
 });

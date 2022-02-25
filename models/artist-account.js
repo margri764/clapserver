@@ -11,7 +11,7 @@ const ArtistAccount = Schema({
     
     city : {
         type: String,
-        required: true
+        // required: true
     },
     
     state: {
@@ -26,27 +26,27 @@ const ArtistAccount = Schema({
     
     email :{
         type: String,
-        required: true
+        // required: true
     },
 
     dateBirth : {
         type: Date,
-        required: true
+        // required: true
     },
 
     jobDate : {
         type: String,
-        required:true
+        // required:true
     },
     
     alias : {
         type: String,
-        required : true
+        // required : true
     },
 
     titular : {
         type: String,
-        required : true
+        // required : true
     },
     
     avatar : {
