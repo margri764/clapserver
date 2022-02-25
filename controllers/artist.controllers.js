@@ -44,10 +44,7 @@ const createArtistAccount = async (req, res=response) => {
 
         await artist.save();
 
-        res.json({
-            success: true,
-            msg: 'Registrado correctamente'
-        });
+        res.json( artist);
 
     } catch (error) {
         console.log(error);
@@ -69,7 +66,6 @@ const createExperience = async (req, res=response) => {
        
         const { uid, ...body } = req.body;
 
-        
         const data ={
             ...body,
             user: uid
@@ -214,24 +210,30 @@ const createAbout = async (req,res=response)=>{
        
 }
 
+// ESTO ES PARA Q ME TRAIGA TODO DE UN ARTISTA!!! TENGO QUE CAMBIAR NOMBRE Y RUTA
+// const getDataArtist = async (req,res=response)=>{
+
+//     const {uid } = req.body
+
+   
+//     const education = await  ArtistEducation .find( {uid} );
+//     const experience = await  ArtistExperience .find( {uid} );
+//     const skills = await  ArtistSkills.find( {uid} );
+//     const about = await ArtistAbout.find( {uid} );
+
+//     res.json({
+//         education,
+//         experience,
+//         skills,
+//         about
+
+//     });
+// }
 
 const getDataArtist = async (req,res=response)=>{
 
-    const {uid } = req.body
-
-   
-    const education = await  ArtistEducation .find( {uid} );
-    const experience = await  ArtistExperience .find( {uid} );
-    const skills = await  ArtistSkills.find( {uid} );
-    const about = await ArtistAbout.find( {uid} );
-
-    res.json({
-        education,
-        experience,
-        skills,
-        about
-
-    });
+    const user = await  ArtistAccount.find( );
+    res.json( {user} );
 }
 
 const getArtistExperience = async (req,res=response)=>{
@@ -239,7 +241,7 @@ const getArtistExperience = async (req,res=response)=>{
     const {uid } = req.params
     const experience = await  ArtistExperience .find( {uid} );
     res.json({
-        experience,
+        experience
     });
 }
 
@@ -252,17 +254,27 @@ const getArtistEducation = async (req,res=response)=>{
         education
     });
 }
+const getArtistByID = async (req,res=response)=>{
+
+    const {uid } = req.params
+    const user = await  ArtistAccount.find( {uid} );
+    // console.log(user)
+    res.json({
+        user
+    });
+}
+
+const getAboutById = async (req,res=response)=>{
+
+    const {uid } = req.params
+    const about = await ArtistAbout.find( {uid} );
+    // console.log(user)
+    res.json({
+        about
+    });
+}
 
 
-// const getUserById = async ( req, res ) =>{
-
-//     const { id } = req.params;
-//     console.log(id)
-
-//    const  user =  await User.findById( id )
-
-//     res.json( user );
-// }
 
 
 
@@ -276,6 +288,8 @@ module.exports={
     getDataArtist,
     createAbout,
     getArtistExperience,
-    getArtistEducation
+    getArtistEducation,
+    getArtistByID,
+    getAboutById
 }
 
