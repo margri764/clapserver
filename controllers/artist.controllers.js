@@ -231,7 +231,8 @@ const createAbout = async (req,res=response)=>{
 // }
 
 const getDataArtist = async (req,res=response)=>{
-
+ 
+   
     const user = await  ArtistAccount.find( );
     res.json( {user} );
 }
@@ -257,7 +258,11 @@ const getArtistEducation = async (req,res=response)=>{
 const getArtistByID = async (req,res=response)=>{
 
     const {uid } = req.params
-    const user = await  ArtistAccount.find( {uid} );
+    // const data ={
+        
+    //     user: uid
+    // }
+    const user = await  ArtistAccount.find( {user:uid} );
     // console.log(user)
     res.json({
         user
