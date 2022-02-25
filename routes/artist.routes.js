@@ -25,7 +25,7 @@ router.get('/about/:id',[ ],getAboutById);
 
 
 
-router.get('/all',[ ], getDataArtist);  
+router.get('/',[ ], getDataArtist);  
 router.get('/:id',[ ], getArtistByID);  
 
 

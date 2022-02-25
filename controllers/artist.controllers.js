@@ -64,11 +64,11 @@ const createExperience = async (req, res=response) => {
     try {
 
        
-        const { uid, ...body } = req.body;
+        const { id, ...body } = req.body;
 
         const data ={
             ...body,
-            user: uid
+            user: id
         }
   
         const experience = new ArtistExperience( data);
@@ -94,7 +94,7 @@ const createEducation = async (req, res=response) => {
     try {
 
     
-        const {uid,  ...body} = req.body;
+        const {id,  ...body} = req.body;
 
         // const checkId = await UserLogin.findById({_id});
 
@@ -105,7 +105,7 @@ const createEducation = async (req, res=response) => {
 
         const data ={
             ...body,
-            user: uid
+            user: id
         }
        
         const education = new ArtistEducation( data);
@@ -134,7 +134,7 @@ const createSkills = async (req, res=response) => {
     try {
 
     
-        const {uid, ...body} = req.body;
+        const {id, ...body} = req.body;
         // console.table(body)
 
         // const checkId = await UserLogin.findById({_id});
@@ -145,7 +145,7 @@ const createSkills = async (req, res=response) => {
      
         const data ={
             ...body,
-            user: uid
+            user: id
         }
        
        
@@ -174,7 +174,7 @@ const createAbout = async (req,res=response)=>{
     try {
 
     
-        const {uid, ...body} = req.body;
+        const {id, ...body} = req.body;
         // console.table(body)
 
         // const checkId = await UserLogin.findById({_id});
@@ -185,7 +185,7 @@ const createAbout = async (req,res=response)=>{
      
         const data ={
             ...body,
-            user: uid
+            user: id
         }
        
        
@@ -213,13 +213,13 @@ const createAbout = async (req,res=response)=>{
 // ESTO ES PARA Q ME TRAIGA TODO DE UN ARTISTA!!! TENGO QUE CAMBIAR NOMBRE Y RUTA
 // const getDataArtist = async (req,res=response)=>{
 
-//     const {uid } = req.body
+//     const {id } = req.body
 
    
-//     const education = await  ArtistEducation .find( {uid} );
-//     const experience = await  ArtistExperience .find( {uid} );
-//     const skills = await  ArtistSkills.find( {uid} );
-//     const about = await ArtistAbout.find( {uid} );
+//     const education = await  ArtistEducation .find( {id} );
+//     const experience = await  ArtistExperience .find( {id} );
+//     const skills = await  ArtistSkills.find( {id} );
+//     const about = await ArtistAbout.find( {id} );
 
 //     res.json({
 //         education,
@@ -239,8 +239,8 @@ const getDataArtist = async (req,res=response)=>{
 
 const getArtistExperience = async (req,res=response)=>{
 
-    const {uid } = req.params
-    const experience = await  ArtistExperience .find( {uid} );
+    const {id } = req.params
+    const experience = await  ArtistExperience .find( {id} );
     res.json({
         experience
     });
@@ -249,20 +249,21 @@ const getArtistExperience = async (req,res=response)=>{
 
 const getArtistEducation = async (req,res=response)=>{
 
-    const {uid } = req.params
-    const education = await  ArtistEducation.find( {uid} );
+    const {id } = req.params
+    const education = await  ArtistEducation.find( {id} );
     res.json({
         education
     });
 }
 const getArtistByID = async (req,res=response)=>{
 
-    const {uid } = req.params
+    const {id} = req.params
+    // console.log(req.params)
     // const data ={
         
-    //     user: uid
+    //     id: id
     // }
-    const user = await  ArtistAccount.find( {user:uid} );
+    const user = await  ArtistAccount.findById( id);
     // console.log(user)
     res.json({
         user
@@ -271,8 +272,8 @@ const getArtistByID = async (req,res=response)=>{
 
 const getAboutById = async (req,res=response)=>{
 
-    const {uid } = req.params
-    const about = await ArtistAbout.find( {uid} );
+    const {id } = req.params
+    const about = await ArtistAbout.find( {id} );
     // console.log(user)
     res.json({
         about
