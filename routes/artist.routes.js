@@ -5,16 +5,16 @@ const {check} = require ('express-validator');
 const router = Router();
 const { checkFields } = require ('../middlewares');
 const { createEducation , createExperience , createSkills, createArtistAccount, getDataArtist, createAbout,
-getArtistExperience, getArtistEducation, getArtistByID, getAboutById } = require('../controllers/artist.controllers');
+getArtistExperienceById, getArtistEducationById, getArtistByID, getAboutById } = require('../controllers/artist.controllers');
 
 
 
 router.post('/experience',[ ],createExperience);  
 
-router.get('/experience/:id',[ ], getArtistExperience);  
+router.get('/experience/:id',[ ], getArtistExperienceById);  
 
 router.post('/education',[ ],createEducation); 
-router.get('/education/:id',[ ], getArtistEducation);   
+router.get('/education/:id',[ ], getArtistEducationById);   
 
 router.post('/skills',[ ],createSkills);  
 

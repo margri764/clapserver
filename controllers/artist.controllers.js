@@ -237,20 +237,21 @@ const getDataArtist = async (req,res=response)=>{
     res.json( {user} );
 }
 
-const getArtistExperience = async (req,res=response)=>{
+const getArtistExperienceById = async (req,res=response)=>{
 
-    const {id } = req.params
-    const experience = await  ArtistExperience .find( {id} );
+    const { id } = req.params
+
+    const experience = await  ArtistExperience.find( {user:id} );
     res.json({
         experience
     });
 }
 
 
-const getArtistEducation = async (req,res=response)=>{
+const getArtistEducationById = async (req,res=response)=>{
 
     const {id } = req.params
-    const education = await  ArtistEducation.find( {id} );
+    const education = await  ArtistEducation.find( {user:id} );
     res.json({
         education
     });
@@ -273,7 +274,7 @@ const getArtistByID = async (req,res=response)=>{
 const getAboutById = async (req,res=response)=>{
 
     const {id } = req.params
-    const about = await ArtistAbout.find( {id} );
+    const about = await ArtistAbout.find( {user:id} );
     // console.log(user)
     res.json({
         about
@@ -293,8 +294,8 @@ module.exports={
     createSkills,
     getDataArtist,
     createAbout,
-    getArtistExperience,
-    getArtistEducation,
+    getArtistExperienceById,
+    getArtistEducationById,
     getArtistByID,
     getAboutById
 }
