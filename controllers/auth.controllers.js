@@ -76,7 +76,7 @@ const confirm = async (req, res) => {
        const { email, code } = data.data;
 
        // Verificar existencia del usuario
-       const user = await UserLogin.findOne({ email:email }) ;
+       const user = await UserLogin.findOne({ email }) ;
 
        if(!user ) {
             return res.json({
