@@ -24,7 +24,7 @@ const createArtistAccount = async (req, res=response) => {
         const { email,  ...body } = req.body;
 
         // Verificar que el usuario  exista
-        const user = await UserLogin.findOne({ email });
+        const user = await UserLogin.findOne({ email:email });
 
         if(!user) {
             return res.status(400).json({
@@ -96,12 +96,6 @@ const createEducation = async (req, res=response) => {
     
         const {id,  ...body} = req.body;
 
-        // const checkId = await UserLogin.findById({_id});
-
-        // if(!checkId){
-        //  return  res.status(400).json({msg:'no existe id en bd'})
-        // }
-
 
         const data ={
             ...body,
@@ -172,17 +166,8 @@ const createSkills = async (req, res=response) => {
 const createAbout = async (req,res=response)=>{
 
     try {
-
-    
         const {id, ...body} = req.body;
-        // console.table(body)
-
-        // const checkId = await UserLogin.findById({_id});
-
-        // if(!checkId){
-        //  return  res.status(400).json({msg:'no existe id en bd'})
-        // }
-     
+    
         const data ={
             ...body,
             user: id
@@ -192,10 +177,7 @@ const createAbout = async (req,res=response)=>{
         const about = new ArtistAbout( data);
         await about.save();
         
-        res.json({
-            // msg: 'About agregado correctamente',
-            about
-        });
+        res.json({  about  });
 
     } catch (error) {
         console.log(error);
