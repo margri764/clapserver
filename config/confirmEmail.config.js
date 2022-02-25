@@ -50,7 +50,7 @@ let transporter = nodemailer.createTransport({
             <a
               
             
-                href=" http://localhost:4200/bienvenida/${ token }"
+                href=" 'https://backclap.herokuapp.com/bienvenida/${ token }"
                 target="_blank"
             >Confirmar Cuenta</a>
         </div>
