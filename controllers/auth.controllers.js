@@ -76,9 +76,9 @@ const confirm = async (req, res) => {
        const { email, code } = data.data;
 
        // Verificar existencia del usuario
-       const user = await UserLogin.findOne({ email }) || null;
+       const user = await UserLogin.findOne({ email:email }) ;
 
-       if(user === null) {
+       if(!user ) {
             return res.json({
                 success: false,
                 msg: 'Usuario no existe'
