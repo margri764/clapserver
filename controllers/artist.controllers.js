@@ -23,10 +23,10 @@ const createArtistAccount = async (req, res=response) => {
         // Obtener la data del usuario: name, email
         const { email,  ...body } = req.body;
 
-        // Verificar que el usuario no exista
-        let user = await UserLogin.findOne({ email }) || null;
+        // Verificar que el usuario  exista
+        const user = await UserLogin.findOne({ email });
 
-        if(user== null) {
+        if(!user) {
             return res.status(400).json({
                 success: false,
                 msg: 'Usuario no existe o el email no esta verificado'
