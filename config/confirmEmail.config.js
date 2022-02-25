@@ -26,7 +26,7 @@ let transporter = nodemailer.createTransport({
             from: `CLAP <${ mail.user }>`, // sender address
             to: email, // list of receivers
             subject, // Subject line
-            text: "Hola amigos, suscríbance para más videos", // plain text body
+            text: "Hola te damos la bienvenida, a este fascinanate mundo de estar conectados!!", // plain text body
             html, // html body
         });
 
@@ -44,7 +44,7 @@ let transporter = nodemailer.createTransport({
         </head>
         
         <div id="email___content">
-            <img src="https://i.imgur.com/eboNR82.png" alt="">
+            <img src="assets/logoClap.png" alt="">
             <h2>Hola </h2>
             <p>Para confirmar tu cuenta, ingresa al siguiente enlace</p>
             <a href="https://backclap.herokuapp.com/bienvenida/${ token }" target="_blank" > Confirmar Cuenta</a>
