@@ -15,14 +15,14 @@ const signUp = async (req, res=response) => {
         const { email, password } = req.body;
 
         // Verificar que el usuario no exista
-        let user = await UserLogin.findOne({ email }) || null;
+        // let user = await UserLogin.findOne({ email }) || null;
 
-        if(user ) {
-            return res.json({
-                success: false,
-                msg: 'Usuario ya existe'
-            });
-        }
+        // if(user ) {
+        //     return res.json({
+        //         success: false,
+        //         msg: 'Usuario ya existe'
+        //     });
+        // }
 
         // Generar el código
         const code = uuidv4();
