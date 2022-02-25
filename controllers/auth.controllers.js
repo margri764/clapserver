@@ -17,7 +17,7 @@ const signUp = async (req, res=response) => {
         // Verificar que el usuario no exista
         let user = await UserLogin.findOne({ email }) || null;
 
-        if(user !== null) {
+        if(user ) {
             return res.json({
                 success: false,
                 msg: 'Usuario ya existe'
@@ -76,7 +76,7 @@ const confirm = async (req, res) => {
        const { email, code } = data.data;
 
        // Verificar existencia del usuario
-       const user = await UserLogin.findOne({ email }) ;
+       const user = await UserLogin.findOne({ sendEmail }) ;
 
        if(!user ) {
             return res.json({

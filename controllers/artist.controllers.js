@@ -123,27 +123,12 @@ const createEducation = async (req, res=response) => {
 }
 
 const createSkills = async (req, res=response) => {
-
     
-    try {
-
+   try {
     
         const {id, ...body} = req.body;
-        // console.table(body)
-
-        // const checkId = await UserLogin.findById({_id});
-
-        // if(!checkId){
-        //  return  res.status(400).json({msg:'no existe id en bd'})
-        // }
-     
-        const data ={
-            ...body,
-            user: id
-        }
        
-       
-        const skills = new ArtistSkills( data);
+        const skills = new ArtistSkills( {user:id});
         await skills.save();
         
         res.json({
