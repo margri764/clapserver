@@ -26,12 +26,12 @@ const createArtistAccount = async (req, res=response) => {
         // Verificar que el usuario  exista
         const user = await UserLogin.findOne({ email }) ;
 
-        if(!user) {
-            return res.status(400).json({
-                success: false,
-                msg: 'Usuario no existe o el email no esta verificado'
-            });
-        }
+        // if(!user) {
+        //     return res.status(400).json({
+        //         success: false,
+        //         msg: 'Usuario no existe o el email no esta verificado'
+        //     });
+        // }
 
         const data ={
             ...body,
