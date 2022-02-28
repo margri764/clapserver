@@ -1,5 +1,33 @@
 const jwt = require('jsonwebtoken');
 
+
+const setJWT = ( id ) =>{ 
+
+    return new Promise( (resolve, reject) =>{
+
+        const payload = { id }; 
+
+        jwt.sign(payload,process.env.SECRETORPRIVATEKEY,{ 
+
+            expiresIn:'72h' 
+
+        }, (err,token)=>{ 
+            if(err){
+                console.log(err);
+                reject( 'no se pudo generar el JWT')
+            }else{
+                resolve ( token );
+         }
+        })
+
+    })
+
+
+}
+
+
+
+//to send email confirmation
 const getToken = (payload) => {
     return jwt.sign({
         data: payload
@@ -21,5 +49,6 @@ const getTokenData = (token) => {
 
 module.exports = {
     getToken,
-    getTokenData
+    getTokenData,
+    setJWT
 }
