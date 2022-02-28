@@ -11,6 +11,7 @@ const checkToken = async ( req , res, next)=>{
 
     if(!token){ 
         return res.status(401).json({
+            success: false,
             msg: 'no hay token en la peticion'
         });
     }
@@ -18,9 +19,9 @@ const checkToken = async ( req , res, next)=>{
     try {
 
                
-        const { uid } = jwt.verify(token, process.env.SECRETORPRIVATEKEY);
+        const { id } = jwt.verify(token, process.env.SECRETORPRIVATEKEY);
        
-        const userAuth = await UserLogin.findById( uid );
+        const userAuth = await UserLogin.findById( id );
 
         if(!userAuth){
             return res.status(401).json({

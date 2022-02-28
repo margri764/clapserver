@@ -7,6 +7,7 @@ const { getTemplate, sendEmail } = require('../config/confirmEmail.config');
 
 
 
+
 const signUp = async (req, res=response) => {
     
     try {
@@ -172,16 +173,15 @@ console.log(user);
 
 const revalidateJWToken = async(req, res = response ) => {
 
-    const { id, name } = req;
+    const { id } = req.header('token');
     console.log('revalidate')
 
     // Generar el JWT
-    const token = await generarJWT( id, name );
+    const token = await setJWT( id );
 
     return res.json({
         success: true,
         id, 
-        name,
         token
     });
 
